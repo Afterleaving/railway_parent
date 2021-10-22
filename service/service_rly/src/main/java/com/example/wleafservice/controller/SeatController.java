@@ -1,10 +1,12 @@
 package com.example.wleafservice.controller;
 
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.example.commonutils.R;
+import com.example.wleafservice.service.SeatService;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import org.springframework.web.bind.annotation.RestController;
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -18,6 +20,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/coachservice/seat")
 @CrossOrigin
 public class SeatController {
+    @Resource
+    private SeatService seatService;
+
+    //通过excel上传封装座位信息
+    @PostMapping("/addSeat")
+    public R addSeat(MultipartFile file){
+
+
+        return R.ok();
+    }
 
 }
 

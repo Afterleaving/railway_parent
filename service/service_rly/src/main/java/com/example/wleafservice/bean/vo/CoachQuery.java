@@ -12,7 +12,7 @@ public class CoachQuery {
 
     private String coachNo;
 
-    private String seatType;
+    private int seatType;
 
     private String startStation;
 

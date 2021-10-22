@@ -42,8 +42,8 @@ public class CoachController {
 
     //增加客车信息
     @PostMapping("/addCoachInfo")
-    public R addCoachInfo(@RequestBody CoachInfoVo coachInfoVo){
-        coachService.saveCoachInfo(coachInfoVo);
+    public R addCoachInfo(@RequestBody Coach coach){
+        coachService.save(coach);
         return R.ok();
     }
 
@@ -63,8 +63,8 @@ public class CoachController {
 
     //修改客车信息
     @PostMapping("/editCoachInfo")
-    public R editCoachInfo(@RequestBody CoachInfoVo coachInfoVo){
-        coachService.updateCoachInfo(coachInfoVo);
+    public R editCoachInfo(@RequestBody Coach coach){
+        coachService.update(coach,null);
         return R.ok();
     }
 }

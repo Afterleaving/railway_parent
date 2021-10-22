@@ -3,15 +3,20 @@ package com.example.wleafservice.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.wleafservice.bean.Coach;
+import com.example.wleafservice.bean.Seat;
 import com.example.wleafservice.bean.vo.CoachInfoVo;
 import com.example.wleafservice.bean.vo.CoachQuery;
 import com.example.wleafservice.mapper.CoachMapper;
 import com.example.wleafservice.service.CoachService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.wleafservice.service.SeatService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -23,6 +28,8 @@ import java.util.Date;
  */
 @Service
 public class CoachServiceImpl extends ServiceImpl<CoachMapper, Coach> implements CoachService {
+    @Resource
+    private SeatService seatService;
 
     @Override
     public void pageCoach(Page<Coach> coachPage, CoachQuery coachQuery) {
@@ -35,7 +42,7 @@ public class CoachServiceImpl extends ServiceImpl<CoachMapper, Coach> implements
         }
 
         String coachNo = coachQuery.getCoachNo();
-        String seatType = coachQuery.getSeatType();
+        int seatType = coachQuery.getSeatType();
         String startStation = coachQuery.getStartStation();
         String endStation = coachQuery.getEndStation();
         Date startTime = coachQuery.getStartTime();
@@ -63,22 +70,26 @@ public class CoachServiceImpl extends ServiceImpl<CoachMapper, Coach> implements
     }
 
     @Override
-    public void saveCoachInfo(CoachInfoVo coachInfoVo) {
-
-    }
-
-    @Override
     public void removeCoachInfo(String coachId) {
-
+        //1.通过coachId删除座位信息
+        seatService.removeById(coachId);
+        //2.删除客车车次信息
+        baseMapper.deleteById(coachId);
     }
 
     @Override
     public CoachInfoVo getCoachInfo(String coachId) {
-        return null;
+        CoachInfoVo coachInfo = new CoachInfoVo();
+        //1.查询座位信息
+        QueryWrapper<Seat> wrapper = new QueryWrapper<>();
+        wrapper.eq("coach_id",coachId);
+        List<Seat> seatList = seatService.list(wrapper);
+        //2.查询车次信息
+        Coach coach = baseMapper.selectById(coachId);
+
+        BeanUtils.copyProperties(coach,coachInfo);
+        coachInfo.setSeats(seatList);
+        return coachInfo;
     }
 
-    @Override
-    public void updateCoachInfo(CoachInfoVo coachInfoVo) {
-
-    }
 }
