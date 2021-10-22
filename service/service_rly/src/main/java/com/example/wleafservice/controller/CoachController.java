@@ -49,7 +49,25 @@ public class CoachController {
     }
 
     //删除客车信息
+    @DeleteMapping("{coachId}")
+    public R deleteCoachInfo(@PathVariable("coachId")String coachId){
+        coachService.removeCoachInfo(coachId);
+        return R.ok();
+    }
+
+    //通过id查询客车信息
+    @GetMapping("/getCoachInfo/{coachId}")
+    public R getCoachInfo(@PathVariable("coachId")String coachId){
+        CoachInfoVo coachInfoVo = coachService.getCoachInfo(coachId);
+        return R.ok().data("coachInfo",coachInfoVo);
+    }
 
     //修改客车信息
+    @PostMapping("/editCoachInfo")
+    public R editCoachInfo(@RequestBody CoachInfoVo coachInfoVo){
+        coachService.updateCoachInfo(coachInfoVo);
+        return R.ok();
+    }
+
 }
 

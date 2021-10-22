@@ -29,4 +29,19 @@ public class CoachServiceImpl extends ServiceImpl<CoachMapper, Coach> implements
     public void saveCoachInfo(CoachInfoVo coachInfoVo) {
 
     }
+
+    @Override
+    public void removeCoachInfo(String coachId) {
+
+    }
+
+    @Override
+    public void updateCoachInfo(CoachInfoVo coachInfoVo) {
+
+    }
+
+    @Override
+    public CoachInfoVo getCoachInfo(String coachId) {
+        return null;
+    }
 }
