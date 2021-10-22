@@ -1,0 +1,23 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: service-rly
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/wdleaf?serverTimezone=GMT%2B8
+    username: root
+    password: root
+
+  #返回json的全局时间格式
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+mybatis-plus:
+  mapper-locations: classpath:com/example/rlyservice/mapper/xml/*.xml
+#  #mybatis日志
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
