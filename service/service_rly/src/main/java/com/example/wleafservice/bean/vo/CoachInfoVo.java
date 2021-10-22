@@ -1,6 +1,9 @@
 package com.example.wleafservice.bean.vo;
 
 import com.example.wleafservice.bean.Seat;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.List;
@@ -10,6 +13,9 @@ import java.util.List;
  * @author: lwl
  * @date: 2021/10/21 23:27
 */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CoachInfoVo {
     private String id;
     private String coachNo;

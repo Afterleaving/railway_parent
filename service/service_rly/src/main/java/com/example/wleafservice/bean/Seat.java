@@ -36,11 +36,15 @@ public class Seat implements Serializable {
     @ApiModelProperty(value = "座位编号")
     private String seatNo;
 
+    //TODO
+    @ApiModelProperty(value = "座位状态")
+    private int seatStatus;     //0：空闲      1：已占座
+
     @ApiModelProperty(value = "客车id")
     private String coachId;
 
     @ApiModelProperty(value = "座位类型")
-    private String type;
+    private int type;    //0：软座      1：卧铺
 
     @ApiModelProperty(value = "座位总量")
     private Integer count;
