@@ -40,7 +40,6 @@ public class CoachController {
         return R.ok().data("total",total).data("rows",records);
     }
 
-
     //增加客车信息
     @PostMapping("/addCoachInfo")
     public R addCoachInfo(@RequestBody CoachInfoVo coachInfoVo){
@@ -49,7 +48,24 @@ public class CoachController {
     }
 
     //删除客车信息
+    @DeleteMapping("/deleteCoachInfo/{coachId}")
+    public R deleteCoachInfo(@PathVariable("coachId")String coachId){
+        coachService.removeCoachInfo(coachId);
+        return R.ok();
+    }
+
+    //通过coachId查询客车车次
+    @GetMapping("/getCoachInfo/{coachId}")
+    public R getCoachInfo(@PathVariable("coachId")String coachId){
+        CoachInfoVo coachInfoVo = coachService.getCoachInfo(coachId);
+        return R.ok().data("coachInfo",coachInfoVo);
+    }
 
     //修改客车信息
+    @PostMapping("/editCoachInfo")
+    public R editCoachInfo(@RequestBody CoachInfoVo coachInfoVo){
+        coachService.updateCoachInfo(coachInfoVo);
+        return R.ok();
+    }
 }
 

@@ -34,6 +34,9 @@ public class Coach implements Serializable {
     @ApiModelProperty(value = "客车编号")
     private String coachNo;
 
+    @ApiModelProperty(value = "座位类型")
+    private String seatType;
+
     @ApiModelProperty(value = "始发站")
     private String startStation;
 
