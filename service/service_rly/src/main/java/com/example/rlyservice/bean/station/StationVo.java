@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class StationVo {
     private String id;
-    private String stationName;
+    private String name;
 }

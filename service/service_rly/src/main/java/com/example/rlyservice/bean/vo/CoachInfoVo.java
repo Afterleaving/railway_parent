@@ -14,17 +14,15 @@ import java.util.List;
  * @date: 2021/10/21 23:27
 */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class CoachInfoVo {
     private String id;
     private String coachNo;
     private String endStation;
+    private Integer seatType;
     private Date startTime;
     private Date endTime;
     private Date arriveDay;
     private String runningTime;
-    private String runningType;
 
     private List<Seat> seats;
 }

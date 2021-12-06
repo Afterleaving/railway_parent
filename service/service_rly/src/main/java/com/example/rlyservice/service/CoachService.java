@@ -21,6 +21,8 @@ public interface CoachService extends IService<Coach> {
     //删除客车车次信息
     void removeCoachInfo(String coachId);
 
-    //通过coachId查询客车车次信息
-    CoachInfoVo getCoachInfo(String coachId);
+    //保存车次信息，返回车次的coachId
+    String saveCoach(Coach coach);
+
+    void updateCoachInfo(Coach coach);
 }

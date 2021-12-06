@@ -8,8 +8,7 @@ import java.util.List;
 @Data
 public class CityVo {
     private String id;
-
-    private String cityName;
+    private String name;
 
     private List<StationVo> children = new ArrayList<>();
 

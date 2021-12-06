@@ -4,8 +4,8 @@ import com.example.commonutils.R;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/coachservice/user")
-@CrossOrigin
+@RequestMapping("/rlyservice/user")
+//@CrossOrigin
 public class LoginController {
     //登录
     @PostMapping("/login")

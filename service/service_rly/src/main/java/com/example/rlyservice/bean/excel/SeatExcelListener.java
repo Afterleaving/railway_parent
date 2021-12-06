@@ -35,6 +35,7 @@ public class SeatExcelListener extends AnalysisEventListener<SeatData> {
             seat.setCount(22);
             seat.setSurplus(22);
         }
+        seatService.save(seat);
     }
 
     @Override

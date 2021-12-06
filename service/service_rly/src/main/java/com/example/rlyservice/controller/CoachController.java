@@ -22,7 +22,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/rlyservice/coach")
-@CrossOrigin
+//@CrossOrigin
 public class CoachController {
     @Resource
     private CoachService coachService;
@@ -31,7 +31,7 @@ public class CoachController {
     @PostMapping("/pageCoachCondition/{current}/{limit}")
     public R pageCoachCondition(@PathVariable("current")long current,
                                 @PathVariable("limit")long limit,
-                                @RequestBody CoachQuery coachQuery)
+                                @RequestBody(required = false) CoachQuery coachQuery)
     {
         Page<Coach> coachPage = new Page<>(current,limit);
         coachService.pageCoach(coachPage,coachQuery);
@@ -43,8 +43,8 @@ public class CoachController {
     //增加客车信息
     @PostMapping("/addCoachInfo")
     public R addCoachInfo(@RequestBody Coach coach){
-        coachService.save(coach);
-        return R.ok();
+        String coachId = coachService.saveCoach(coach);
+        return R.ok().data("coachId",coachId);
     }
 
     //删除客车信息
@@ -57,14 +57,24 @@ public class CoachController {
     //通过coachId查询客车车次
     @GetMapping("/getCoachInfo/{coachId}")
     public R getCoachInfo(@PathVariable("coachId")String coachId){
-        CoachInfoVo coachInfoVo = coachService.getCoachInfo(coachId);
-        return R.ok().data("coachInfo",coachInfoVo);
+        Coach coachInfo = coachService.getById(coachId);
+        return R.ok().data("coachInfo",coachInfo);
     }
 
     //修改客车信息
     @PostMapping("/editCoachInfo")
     public R editCoachInfo(@RequestBody Coach coach){
-        coachService.update(coach,null);
+        coachService.updateCoachInfo(coach);
+        return R.ok();
+    }
+
+    //车次发布
+    @PostMapping("/publishCoach/{coachId}")
+    public R publishCoach(@PathVariable("coachId")String coachId){
+        Coach coach = new Coach();
+        coach.setId(coachId);
+        coach.setStatus("Normal");
+        coachService.updateById(coach);
         return R.ok();
     }
 }

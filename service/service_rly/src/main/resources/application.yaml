@@ -4,17 +4,31 @@ server:
 spring:
   application:
     name: service-rly
+  # 环境设置：dev、test、prod
+  profiles:
+    active: dev
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/wdleaf?serverTimezone=GMT%2B8
     username: root
     password: root
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
 
   #返回json的全局时间格式
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+
+#开启熔断机制
+feign:
+  hystrix:
+    enabled: true
+  httpclient:
+    connection-timeout: 3
 
 mybatis-plus:
   mapper-locations: classpath:com/example/rlyservice/mapper/xml/*.xml

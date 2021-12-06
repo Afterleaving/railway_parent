@@ -7,6 +7,7 @@ import com.example.rlyservice.bean.excel.SeatExcelListener;
 import com.example.rlyservice.mapper.SeatMapper;
 import com.example.rlyservice.service.SeatService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.servicebase.exceptionhandler.RailwayException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,6 +26,9 @@ public class SeatServiceImpl extends ServiceImpl<SeatMapper, Seat> implements Se
 
     @Override
     public void saveSeat(String coachId, MultipartFile file, SeatService seatService) {
+        if (file == null) {
+            throw new RailwayException(20001,"未选择文件");
+        }
         try {
             InputStream is = file.getInputStream();
             EasyExcel.read(is, SeatData.class,new SeatExcelListener(seatService,coachId)).sheet().doRead();
