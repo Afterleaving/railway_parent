@@ -1,0 +1,51 @@
+server:
+  port: 8222
+
+spring:
+  application:
+    name: service-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    gateway:
+      discovery:
+        locator:
+          enabled: true #开启从注册中心创建动态路由的功能，利用微服务名进行路由
+          lower-case-service-id: true
+      routes:
+        - id: service-acl
+          uri: lb://service-acl    #协议为 lb：表示启用负载均衡功能
+          predicates:
+            - Path=/*/acl/**
+
+        - id: service-rly
+          uri: lb://service-rly
+          predicates:
+            - Path=/rlyservice/**
+
+        - id: service-ucenter
+          uri: lb://service-ucenter
+          predicates:
+            - Path=/ucenter/**
+
+        - id: service-msm
+          uri: lb://service-msm
+          predicates:
+            - Path=/edumsm/**
+
+        - id: service-order
+          uri: lb://service-order
+          predicates:
+            - Path=/leaforder/**
+
+        - id: service-oss
+          uri: lb://service-oss
+          predicates:
+            - Path=/eduoss/**
+
+        - id: service-statistic
+          uri: lb://service-statistic
+          predicates:
+            - Path=/staservice/**
+
